@@ -8,6 +8,8 @@
 import UIKit
 
 class CalculatorHeaderViewController: UIViewController {
+    
+    static let identifier: String = "CalculatorHeaderViewController"
 
     override func viewDidLoad() {
         super.viewDidLoad()
