@@ -7,25 +7,41 @@
 
 import UIKit
 
-class CalculatorHeaderViewController: UIViewController {
+class CalculatorHeaderViewController: UICollectionReusableView{
     
     static let identifier: String = "CalculatorHeaderViewController"
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    private let label: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .right
+        label.font = .systemFont(ofSize: 72, weight: .regular)
+        label.text = "???"
+        return label
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setupUI()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    public func configure(currentCalculatorText: String) {
+        self.label.text = currentCalculatorText
     }
-    */
-
+    
+    private func setupUI() {
+        self.backgroundColor = .black
+        self.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.trailingAnchor.constraint(equalTo: label.trailingAnchor),
+            self.leadingAnchor.constraint(equalTo: label.leadingAnchor),
+            self.bottomAnchor.constraint(equalTo: label.bottomAnchor),
+        ])
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }

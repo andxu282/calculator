@@ -39,12 +39,25 @@ class CalculatorButtonCollectionViewCell: UICollectionViewCell {
         self.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.layer.cornerRadius = self.frame.height / 2
-        
-        NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            titleLabel.heightAnchor.constraint(equalTo: self.heightAnchor),
-            titleLabel.widthAnchor.constraint(equalTo: self.widthAnchor)
-        ])
+        switch self.calculatorButton {
+        case .number(0):
+            NSLayoutConstraint.activate([
+                titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+                titleLabel.heightAnchor.constraint(equalTo: self.heightAnchor),
+                titleLabel.widthAnchor.constraint(equalToConstant: self.frame.height)
+            ])
+        default:
+            NSLayoutConstraint.activate([
+                titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+                titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+                titleLabel.heightAnchor.constraint(equalTo: self.heightAnchor),
+                titleLabel.widthAnchor.constraint(equalTo: self.widthAnchor)
+            ])
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.titleLabel.removeFromSuperview()
     }
 }
